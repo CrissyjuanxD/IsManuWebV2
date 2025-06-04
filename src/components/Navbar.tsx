@@ -101,10 +101,18 @@ const Navbar: React.FC<{ className?: string }> = ({ className = '' }) => {
           <div className="hidden md:flex items-center">
             <button 
               onClick={toggleMusic}
-              className="text-white hover:text-accent transition-colors"
+              className="flex items-center space-x-2 text-white hover:text-accent transition-colors"
               aria-label={isPlaying ? "Pause music" : "Play music"}
+              style={{ whiteSpace: 'nowrap' }}  // evita que el contenido haga wrap a la siguiente línea
             >
-              <span className="text-2xl font-bold">#MANUCUM</span>
+              <span className="text-2xl font-bold" style={{ color: '#b667d6' }}>
+                #MANUCUM
+              </span>
+              <img 
+                src="https://cdn.discordapp.com/attachments/1180691474262798495/1379592668115374110/1115486236723925012_1.gif?ex=6840cd4b&is=683f7bcb&hm=24419731e8d20215b2658c1d138a516bd0e13ed33cc2312bc2495c47763fad84&" 
+                alt="Manucum GIF" 
+                className="w-6 h-6"
+              />
             </button>
           </div>
 
