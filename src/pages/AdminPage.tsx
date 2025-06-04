@@ -21,10 +21,14 @@ const AdminPage: React.FC = () => {
     return matchesFilter && matchesSearch;
   });
 
-  const handleDelete = (id: string) => {
+  const handleDelete = async (id: string) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar esta felicitación?')) {
-      deleteWish(id);
-      toast.success('Felicitación eliminada con éxito');
+      const success = await deleteWish(id);
+      if (success) {
+        toast.success('Felicitación eliminada con éxito');
+      } else {
+        toast.error('No se pudo eliminar la felicitación');
+      }
     }
   };
 
@@ -81,7 +85,14 @@ const AdminPage: React.FC = () => {
               </button>
               
               <button 
-                onClick={toggleSubmission}
+                onClick={async () => {
+                  try {
+                    await toggleSubmission();
+                  } catch (error) {
+                    console.error('Error al cambiar estado:', error);
+                    toast.error(error instanceof Error ? error.message : 'Error al cambiar estado');
+                  }
+                }}
                 className={`btn flex items-center ${isSubmissionPaused ? 'bg-green-500 hover:bg-green-600' : 'bg-red-500 hover:bg-red-600'} text-white`}
               >
                 {isSubmissionPaused ? (

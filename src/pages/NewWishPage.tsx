@@ -70,7 +70,15 @@ const NewWishPage: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      addWish({
+      console.log('Intentando agregar felicitación:', {
+        name,
+        type,
+        message,
+        image: profileImage.url,
+        mediaUrl: media.url
+      });
+      
+      await addWish({
         name,
         type,
         message,
@@ -81,7 +89,14 @@ const NewWishPage: React.FC = () => {
       toast.success('¡Tu felicitación ha sido enviada con éxito!');
       navigate('/');
     } catch (error) {
-      toast.error('Error al enviar tu felicitación. Inténtalo de nuevo.');
+      console.error('Error completo al enviar:', error);
+      
+      // Mostrar diferentes mensajes según el tipo de error
+      if (error instanceof Error) {
+        toast.error(`Error: ${error.message}`);
+      } else {
+        toast.error('Error desconocido al enviar tu felicitación. Verifica la consola para más detalles.');
+      }
     } finally {
       setIsSubmitting(false);
     }

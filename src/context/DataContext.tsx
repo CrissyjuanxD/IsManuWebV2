@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { supabase } from '../utils/supabaseClient';
 import { v4 as uuidv4 } from 'uuid';
 
 export interface WishType {
@@ -13,11 +14,11 @@ export interface WishType {
 
 interface DataContextType {
   wishes: WishType[];
-  addWish: (wish: Omit<WishType, 'id' | 'date'>) => void;
-  deleteWish: (id: string) => void;
-  editWish: (id: string, updatedWish: Partial<WishType>) => void;
+  addWish: (wish: Omit<WishType, 'id' | 'date'>) => Promise<void>;
+  deleteWish: (id: string) => Promise<boolean>;
+  editWish: (id: string, updatedWish: Partial<WishType>) => Promise<void>;
   isSubmissionPaused: boolean;
-  toggleSubmission: () => void;
+  toggleSubmission: () => Promise<void>;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -30,91 +31,136 @@ export const useData = () => {
   return context;
 };
 
-// Initial data to populate the website
-const initialWishes: WishType[] = [
-  {
-    id: uuidv4(),
-    name: 'CrissyjuanxD',
-    type: 'mod',
-    message: 'Feliz cumpleaños Manuel! Espero que tengas un día espectacular lleno de alegría y buenos momentos. Gracias por todas las risas que nos das en tus streams.',
-    image: 'https://randomuser.me/api/portraits/men/32.jpg',
-    mediaUrl: 'https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    date: Date.now() - 1000 * 60 * 60 * 24 * 2,
-  },
-  {
-    id: uuidv4(),
-    name: 'StreamerFan123',
-    type: 'vip',
-    message: 'Manuel, eres el mejor streamer! Tu contenido siempre me alegra el día. Te deseo un cumpleaños increíble rodeado de tus seres queridos.',
-    image: 'https://randomuser.me/api/portraits/women/44.jpg',
-    mediaUrl: 'https://images.pexels.com/photos/2690323/pexels-photo-2690323.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    date: Date.now() - 1000 * 60 * 60 * 24,
-  },
-  {
-    id: uuidv4(),
-    name: 'GameMaster',
-    type: 'mod',
-    message: 'Muchas felicidades en tu día especial, Manuel! Gracias por crear esta comunidad tan increíble. Que cumplas muchos más!',
-    image: 'https://randomuser.me/api/portraits/men/22.jpg',
-    mediaUrl: 'https://images.pexels.com/photos/3831849/pexels-photo-3831849.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    date: Date.now() - 1000 * 60 * 60 * 12,
-  },
-];
-
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [wishes, setWishes] = useState<WishType[]>(() => {
-    const savedWishes = localStorage.getItem('manucum-wishes');
-    return savedWishes ? JSON.parse(savedWishes) : initialWishes;
-  });
-  
-  const [isSubmissionPaused, setIsSubmissionPaused] = useState<boolean>(() => {
-    const savedStatus = localStorage.getItem('manucum-paused');
-    return savedStatus ? JSON.parse(savedStatus) : false;
-  });
+  const [wishes, setWishes] = useState<WishType[]>([]);
+  const [isSubmissionPaused, setIsSubmissionPaused] = useState(false);
 
+  // Cargar datos desde Supabase al iniciar
   useEffect(() => {
-    localStorage.setItem('manucum-wishes', JSON.stringify(wishes));
-  }, [wishes]);
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from('wishes')
+        .select('*')
+        .order('date', { ascending: false });
 
-  useEffect(() => {
-    localStorage.setItem('manucum-paused', JSON.stringify(isSubmissionPaused));
-  }, [isSubmissionPaused]);
+      if (data) setWishes(data as WishType[]);
+      if (error) console.error('Error loading wishes:', error);
 
-  const addWish = (wish: Omit<WishType, 'id' | 'date'>) => {
-    const newWish: WishType = {
+      const { data: configData, error: configError } = await supabase
+        .from('config')
+        .select('isSubmissionPaused')
+        .single();
+
+      if (configData) setIsSubmissionPaused(configData.isSubmissionPaused);
+      if (configError) console.error('Error loading config:', configError);
+    };
+
+    fetchData();
+  }, []);
+
+  const addWish = async (wish: Omit<WishType, 'id' | 'date'>) => {
+    const newWish = {
       ...wish,
       id: uuidv4(),
-      date: Date.now(),
+      date: new Date().toISOString(),
     };
-    
-    setWishes(prevWishes => [newWish, ...prevWishes]);
+
+    console.log('Datos a insertar en Supabase:', newWish);
+
+    try {
+      const { data, error } = await supabase
+        .from('wishes')
+        .insert(newWish)
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Error de Supabase:', error);
+        throw new Error(error.message || 'Error al agregar la felicitación');
+      }
+
+      if (!data) {
+        throw new Error('No se recibieron datos de Supabase');
+      }
+
+      console.log('Felicitación agregada correctamente:', data);
+      setWishes(prev => [data as WishType, ...prev]);
+      return data;
+    } catch (error) {
+      console.error('Error completo en addWish:', error);
+      throw error; // Re-lanzamos el error para que lo capture handleSubmit
+    }
   };
 
-  const deleteWish = (id: string) => {
-    setWishes(prevWishes => prevWishes.filter(wish => wish.id !== id));
+  const deleteWish = async (id: string) => {
+    try {
+      console.log('Intentando eliminar felicitación con ID:', id);
+      
+      // Opción 1: Eliminar sin necesidad de contar filas afectadas
+      const { error } = await supabase
+        .from('wishes')
+        .delete()
+        .eq('id', id);
+
+      if (error) {
+        console.error('Error de Supabase al eliminar:', error);
+        throw new Error(`Error al eliminar: ${error.message}`);
+      }
+
+      console.log('Felicitación eliminada correctamente de Supabase');
+      
+      // Actualizar el estado local
+      setWishes(prev => prev.filter(wish => wish.id !== id));
+      
+      return true;
+    } catch (error) {
+      console.error('Error completo al eliminar:', error);
+      throw error;
+    }
   };
 
-  const editWish = (id: string, updatedWish: Partial<WishType>) => {
-    setWishes(prevWishes => 
-      prevWishes.map(wish => 
-        wish.id === id ? { ...wish, ...updatedWish } : wish
-      )
+  const editWish = async (id: string, updatedWish: Partial<WishType>) => {
+    const { error } = await supabase.from('wishes').update(updatedWish).eq('id', id);
+    if (error) throw new Error('Error editing wish');
+    setWishes(prev =>
+      prev.map(wish => (wish.id === id ? { ...wish, ...updatedWish } : wish))
     );
   };
 
-  const toggleSubmission = () => {
-    setIsSubmissionPaused(prev => !prev);
+  const toggleSubmission = async () => {
+    const newStatus = !isSubmissionPaused;
+
+    try {
+      console.log('Actualizando estado de envíos a:', newStatus);
+      
+      const { error } = await supabase
+        .from('config')
+        .upsert({ id: 1, isSubmissionPaused: newStatus }); // Usamos upsert en lugar de update
+
+      if (error) {
+        console.error('Error de Supabase:', error);
+        throw new Error(`Error al actualizar: ${error.message}`);
+      }
+
+      console.log('Estado de envíos actualizado correctamente');
+      setIsSubmissionPaused(newStatus);
+    } catch (error) {
+      console.error('Error completo en toggleSubmission:', error);
+      throw error;
+    }
   };
 
   return (
-    <DataContext.Provider value={{ 
-      wishes, 
-      addWish, 
-      deleteWish, 
-      editWish,
-      isSubmissionPaused,
-      toggleSubmission 
-    }}>
+    <DataContext.Provider
+      value={{
+        wishes,
+        addWish,
+        deleteWish,
+        editWish,
+        isSubmissionPaused,
+        toggleSubmission,
+      }}
+    >
       {children}
     </DataContext.Provider>
   );

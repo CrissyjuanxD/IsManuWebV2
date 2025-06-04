@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.9",
     "cloudinary": "^2.6.1",
     "lucide-react": "^0.344.0",
     "manucum-birthday-website": "file:",
