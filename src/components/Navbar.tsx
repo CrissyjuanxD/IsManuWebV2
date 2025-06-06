@@ -5,15 +5,15 @@ import { Twitter, Instagram, Twitch, Youtube } from 'lucide-react';
 const SONGS = [
   { 
     name: "NightDancer IsManuPlay", 
-    url: "https://cdn.discordapp.com/attachments/1180691474262798495/1379645504652312606/ytmp3-convert.com_256kbps-night-dancer-ismanuplay-ia-cover_cut_209sec.mp3?ex=6840fe80&is=683fad00&hm=261f32dec33f634142286e1c310d0e751303ae35e7317b45409c1865718cf49e&" 
+    url: "https://res.cloudinary.com/dlcusrqqy/video/upload/v1749183409/night_dancer_manuweb_hnphsn.mp3" 
   },
   { 
     name: "DuaLipa", 
-    url: "https://cdn.discordapp.com/attachments/1180691474262798495/1379638264323117116/ytmp3-convert.com_256kbps-dua-lipa-houdini-official-music-video.mp3?ex=6840f7c2&is=683fa642&hm=93fd1fcc10ef3c43be3cf219e3663f2ae324beb22101a0de2066bcc90db3ad63&" 
+    url: "https://res.cloudinary.com/dlcusrqqy/video/upload/v1749183523/dualiapa_manuweb_wnjvku.mp3" 
   },
   { 
     name: "RapManujiji", 
-    url: "https://cdn.discordapp.com/attachments/1180691474262798495/1379642331250036897/ytmp3-convert.com_256kbps-el-rap-de-ismanuplay.mp3?ex=6840fb8c&is=683faa0c&hm=54f45b9197f5bc0f53ea974a6a0ab0df1bd3e4c772784bb76d6949be3335b5e1&" 
+    url: "https://res.cloudinary.com/dlcusrqqy/video/upload/v1749183513/rapmanu_manuweb_ao3nw5.mp3" 
   }
 ];
 
@@ -109,7 +109,7 @@ const Navbar: React.FC<{ className?: string }> = ({ className = '' }) => {
                 #MANUCUM
               </span>
               <img 
-                src="https://cdn.discordapp.com/attachments/1180691474262798495/1379592668115374110/1115486236723925012_1.gif?ex=6840cd4b&is=683f7bcb&hm=24419731e8d20215b2658c1d138a516bd0e13ed33cc2312bc2495c47763fad84&" 
+                src="https://res.cloudinary.com/dlcusrqqy/image/upload/v1749183649/manubaile_manuweb_i2xgf5.gif" 
                 alt="Manucum GIF" 
                 className="w-6 h-6"
               />
