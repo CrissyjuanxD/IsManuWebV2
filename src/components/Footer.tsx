@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="flex items-center">
             <span className="text-secondary">#MANUCUM</span>
             <img 
-              src="https://cdn.discordapp.com/attachments/1180691474262798495/1379592668115374110/1115486236723925012_1.gif?ex=6840cd4b&is=683f7bcb&hm=24419731e8d20215b2658c1d138a516bd0e13ed33cc2312bc2495c47763fad84&" 
+              src="https://res.cloudinary.com/dlcusrqqy/image/upload/v1749183649/manubaile_manuweb_i2xgf5.gif" 
               alt="Party emoji" 
               className="h-6 w-6 ml-2"
             />
