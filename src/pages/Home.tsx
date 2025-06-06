@@ -36,7 +36,8 @@ const Home: React.FC = () => {
               />
             </div>
             <p className="text-xl md:text-2xl mb-8 text-white/90">
-              Ya que es un día especial, decidí prepararte una sorpresa junto con algunos mods y VIPs del canal. Espero que disfrutes los mensajitos 🧡 <br> PD: NO presiones el #MANUCUM morado!!
+              Ya que es un día especial, decidí prepararte una sorpresa junto con algunos mods y VIPs del canal. Espero que disfrutes los mensajitos 🧡 <br> 
+              PD: NO presiones el #MANUCUM morado!!
             </p>
             
             <div className="flex flex-col sm:flex-row justify-center gap-4">
