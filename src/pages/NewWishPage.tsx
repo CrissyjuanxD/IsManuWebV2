@@ -107,7 +107,7 @@ const NewWishPage: React.FC = () => {
       className="min-h-screen bg-cover bg-center bg-fixed"
       style={{
         backgroundImage:
-          'url(https://cdn.discordapp.com/attachments/1180691474262798495/1379629230043693188/GKOIl-9WgAAkxU9.jpg?ex=6840ef58&is=683f9dd8&hm=a71ed9259bc90a6000c23509ae5535daff3408e245043258a10b406012907588)',
+          'url(https://res.cloudinary.com/dlcusrqqy/image/upload/v1749185199/enviarf_manuweb_qipk4i.jpg)',
       }}
     >
       <div className="container mx-auto px-4 py-12">
