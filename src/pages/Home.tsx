@@ -20,7 +20,7 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="h-screen overflow-hidden bg-[url('https://media.discordapp.net/attachments/747301509359992834/1260066022682005576/Untitled236_20240708212219.png?ex=68405dae&is=683f0c2e&hm=0846631b3824b69a259d1e8ab12f85b50f6b9e07820d14de34e301321d27c690&=&format=webp&quality=lossless&width=742&height=544')] bg-fixed bg-cover bg-center bg-no-repeat">
+    <div className="h-screen overflow-hidden bg-[url('https://res.cloudinary.com/dlcusrqqy/image/upload/v1749184330/fondoprincipal_manuweb_mvypwg.png')] bg-fixed bg-cover bg-center bg-no-repeat">
       {/* Hero Section */}
       <div className="bg-gradient-to-b from-primary/50 to-secondary/50 h-full py-16 md:py-24 relative overflow-hidden flex flex-col justify-center">
         <div className="container mx-auto px-4 relative z-10">
@@ -30,7 +30,7 @@ const Home: React.FC = () => {
                 ¡Feliz Cumpleaños Manuel!
               </h1>
               <img 
-                src="https://cdn.discordapp.com/attachments/1180691474262798495/1379626632435994634/1058_sin_titulo_20240606143716.png?ex=6840eced&is=683f9b6d&hm=1a02b84cdc0e3a4bb69d43abc76287e2640368b6b818a03ea5d7086c0abc85be&" 
+                src="https://res.cloudinary.com/dlcusrqqy/image/upload/v1749184519/palito_manuweb_p3oglm.png" 
                 alt="Manuelin" 
                 className="w-16 h-16 md:w-20 md:h-20 rounded-full border-4 border-white shadow-lg"
               />
