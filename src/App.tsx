@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -28,7 +28,11 @@ function App() {
   return (
     <DataProvider>
       <div className="flex flex-col min-h-screen relative">
-        <Navbar className="sticky top-0 z-50" />
+        
+        {/* Navbar envuelto en un div para evitar el error de TypeScript */}
+        <div className="sticky top-0 z-50">
+          <Navbar />
+        </div>
         
         {isTransitioning && <PageTransition />}
         
@@ -42,7 +46,11 @@ function App() {
           </Routes>
         </main>
         
-        <Footer className="sticky bottom-0 z-40" />
+        {/* Footer envuelto en un div para evitar el error de TypeScript */}
+        <div className="sticky bottom-0 z-40">
+          <Footer />
+        </div>
+
       </div>
     </DataProvider>
   );
