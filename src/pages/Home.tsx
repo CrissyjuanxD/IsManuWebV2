@@ -9,7 +9,7 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   const handleAdminAccess = () => {
-    if (password === 'Guillen14xD') {
+    if (password === 'KARU_MANDARINO777') {
       navigate('/admin');
       setShowAdminModal(false);
       setPassword('');
@@ -44,7 +44,7 @@ const Home: React.FC = () => {
                 Felicitaciones Mods
               </Link>
               <Link to="/vips" className="btn bg-white text-primary hover:bg-gray-100">
-                Felicitaciones VIPs
+                Felicitaciones VIPs Y Manuriters Reconocidos
               </Link>
             </div>
           </div>

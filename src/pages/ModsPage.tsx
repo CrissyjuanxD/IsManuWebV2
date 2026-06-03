@@ -30,7 +30,7 @@ const ModsPage: React.FC = () => {
             <div className="backdrop-blur-sm bg-white/30 rounded-xl p-6 mb-12 text-center">
               <h1 className="text-4xl font-bold mb-4 text-white">Felicitaciones de Moderadores</h1>
               <p className="text-lg text-white/90">
-                Aunque nos dejes sin comer, tus queridos mods tienen unas palabras para ti.  
+                Aunque nos dejes sin comer y nos explotes laboralmente sin paga, tus queridos mods tienen unas palabras para ti.  
               </p>
             </div>
 

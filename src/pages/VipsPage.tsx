@@ -12,9 +12,9 @@ const VipsPage: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
             <div className="backdrop-blur-sm bg-white/30 rounded-xl p-6 mb-12 text-center">
-              <h1 className="text-4xl font-bold mb-4 text-white">Felicitaciones de VIPs</h1>
+              <h1 className="text-4xl font-bold mb-4 text-white">Felicitaciones de VIPs y Manuriters Reconocidos</h1>
               <p className="text-lg text-white/90">
-                Aunque maltratas a tus VIPs, también te han dejado unos lindos mensajitos.
+                Aunque maltrates a tus queridos manuriters, también te han dejado unos lindos mensajitos.
               </p>
             </div>
             
@@ -26,7 +26,7 @@ const VipsPage: React.FC = () => {
               </div>
             ) : (
               <div className="text-center py-12 bg-white/90 rounded-xl">
-                <p className="text-gray-500 text-lg">Aún no hay felicitaciones de VIPs.</p>
+                <p className="text-gray-500 text-lg">Aún no hay felicitaciones de VIPs y Manuriters Reconocidos.</p>
                 <p className="text-gray-500">¡Sé el primero en dejar tu mensaje!</p>
               </div>
             )}
