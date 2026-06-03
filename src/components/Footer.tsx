@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-2 md:mb-0">
-            <p className="text-center md:text-left">© 2025 Hecho por CrissyjuanxD</p>
+            <p className="text-center md:text-left">© 2026 Hecho por CrissyjuanxD</p>
           </div>
           <div className="flex items-center">
             <span className="text-secondary">#MANUCUM</span>
