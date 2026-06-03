@@ -23,7 +23,7 @@ const ModsPage: React.FC = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[url('https://cdn.discordapp.com/attachments/1180691474262798495/1379595553079431178/GMTgpV0XcAAubT1.jpg?ex=6840cffb&is=683f7e7b&hm=fbc8798203224ed4c0415f05a02da96ed8053a53f1696552c1c1cfa8dbd306ed&')] bg-fixed bg-cover bg-center bg-no-repeat">
+    <div className="min-h-screen bg-[url('https://res.cloudinary.com/dlcusrqqy/image/upload/v1749185199/modsfondo_manuweb_wbazkp.jpg')] bg-fixed bg-cover bg-center bg-no-repeat">
       <div className="bg-black/30 min-h-screen py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">

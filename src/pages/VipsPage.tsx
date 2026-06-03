@@ -7,7 +7,7 @@ const VipsPage: React.FC = () => {
   const vipWishes = wishes.filter(wish => wish.type === 'vip');
 
   return (
-    <div className="min-h-screen bg-[url('https://cdn.discordapp.com/attachments/1180691474262798495/1379628476969254973/249_sin_titulo_20240605163236.png?ex=6840eea5&is=683f9d25&hm=79a0066717f0d53c6cfaa3f51cd95649a292bf73d1a64716ede7e3618a5deff9&')] bg-fixed bg-cover bg-center">
+    <div className="min-h-screen bg-[url('https://res.cloudinary.com/dlcusrqqy/image/upload/v1749182597/fondovips_amxeiw.png')] bg-fixed bg-cover bg-center">
       <div className="bg-black/30 min-h-screen py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto">
