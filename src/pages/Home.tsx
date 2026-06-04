@@ -40,7 +40,7 @@ const Home: React.FC = () => {
 
             {/* Descripción */}
             <p className="text-base md:text-lg mb-6 text-white/90 leading-snug">
-              Ya que es un día especial, decidí prepararte una sorpresa junto con algunos mods y VIPs del canal. Espero disfrutes los mensajitos 🧡
+              Ya que es un día especial, decidí prepararte una sorpresa junto con algunos Mods, VIPs y Manuriters del canal. Espero disfrutes los mensajitos 🧡
               <br />
               <span className="text-sm opacity-75">PD: NO presiones el #MANUCUM morado!!</span>
             </p>
